@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 
-const { CreateErrorClass } = require("../utils/error");
-
 var emailRegex =
   /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
@@ -35,12 +33,12 @@ const checkSignup = async (req: Request, res: Response, next: NextFunction) => {
     console.log(body);
     if (!isEmailValid(body.email)) {
       //   res.status(500).json({ status: "failure", message: "Email not valid" });
-      return next(CreateErrorClass(500, "failure", "Email not valid"));
+      return res.status(500).json({ status: "failure", message: "Email not valid" });
     }
 
     if (body.password !== body.confirmPassword) {
       //   res.status(500).json({ status: "failure", message: "" });
-      return next(CreateErrorClass(500, "failure", "Password dont match"));
+      return res.status(500).json({ status: "failure", message: "Password dont match" });
     }
     req.body = body;
 

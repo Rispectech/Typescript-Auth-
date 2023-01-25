@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { resetPasswordModelType } from "../type";
 
 const bcrypt = require("bcrypt");
 const { userModel } = require("../models/User");
@@ -14,7 +13,7 @@ const {
   validateUserPassword,
   upsertUser,
 } = require("../services/User");
-const { CreateErrorClass } = require("../utils/error");
+// const { CreateErrorClass } = require("../utils/error");
 const { signJwt } = require("../utils/Jwt");
 import resetPasswordModel from "../models/ResetPassword";
 const { compareHash, generateHash } = require("../utils/bycrpt");
@@ -39,7 +38,7 @@ const userSignupHandler = async (req: Request, res: Response, next: NextFunction
     const db_user = await findUser({ email: body.email });
 
     if (db_user) {
-      next(CreateErrorClass(500, "failure", "User already Present"));
+      return res.status(500).json({ status: "failure", message: "User already present" });
     }
     const user = await createUser(body);
 
@@ -63,7 +62,7 @@ const userLoginHandler = async (req: Request, res: Response, next: NextFunction)
     if (!user) return res.status(500).json({ status: "failure", message: "Invalid Email" });
 
     if (!userBody.password) {
-      return next(CreateErrorClass(500, "failure", "Password is required"));
+      return res.status(500).json({ status: "failure", message: "Password is required" });
     }
     if (!validateUserPassword(userBody.password, user))
       return res.status(500).json({ status: "failure", message: "Invalid Password" });
