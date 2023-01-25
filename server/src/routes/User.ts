@@ -24,6 +24,4 @@ userRouter
 
 userRouter.route("/api/user/resetPassword").post(deserializeUser, resetUserPasswordHandler);
 
-module.exports = {
-  userRouter,
-};
+export { userRouter };

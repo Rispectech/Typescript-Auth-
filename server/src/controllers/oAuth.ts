@@ -79,6 +79,4 @@ const googleOauthHandler = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = {
-  googleOauthHandler,
-};
+export { googleOauthHandler };

@@ -5,8 +5,6 @@ import resetPasswordModel from "../models/ResetPassword";
 import { clientModel, clientSchema, UserDocument } from "../models/Client";
 import { sendEmail, getHrTime } from "../utils/Mail";
 import { FilterQuery, UpdateQuery } from "mongoose";
-import { clientInput } from "../type";
-
 const findClient = async (query: FilterQuery<UserDocument>) => {
   return await clientModel.findOne(query);
 };
