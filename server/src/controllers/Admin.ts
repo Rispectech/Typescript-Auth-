@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { resetPasswordModelType } from "../type";
-
 import bcrypt from "bcrypt";
 import { clientModel } from "../models/Client";
 
